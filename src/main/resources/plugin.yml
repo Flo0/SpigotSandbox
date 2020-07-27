@@ -1,0 +1,4 @@
+name: SpigotSandbox
+version: ${project.version}
+main: com.gestankbratwurst.spigotsandbox.SpigotSandbox
+api-version: 1.16
