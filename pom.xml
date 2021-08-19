@@ -12,7 +12,7 @@
   <name>SpigotSandbox</name>
 
   <properties>
-    <java.version>1.8</java.version>
+    <java.version>16</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -60,24 +60,86 @@
       <url>https://maven.enginehub.org/repo/</url>
     </repository>
     <repository>
-      <id>avarion-private</id>
-      <url>http://repo.avarioncraft.de/repository/development/</url>
+      <id>dmulloy2-repo</id>
+      <url>https://repo.dmulloy2.net/nexus/repository/public/</url>
+    </repository>
+    <repository>
+      <id>sk89q-repo</id>
+      <url>https://maven.enginehub.org/repo/</url>
+    </repository>
+    <repository>
+      <id>bungeecord-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
   </repositories>
 
   <dependencies>
+    <!--
+<dependency>
+  <groupId>org.bytedeco</groupId>
+  <artifactId>javacv-platform</artifactId>
+  <version>1.5.5</version>
+</dependency>
+
     <dependency>
       <groupId>com.sk89q.worldedit</groupId>
       <artifactId>worldedit-bukkit</artifactId>
       <version>7.2.0-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
+-->
+    <!-- Annotation Command Framework -->
 
     <dependency>
-      <groupId>org.spigotmc</groupId>
-      <artifactId>spigot</artifactId>
-      <version>1.16.1-R0.1-SNAPSHOT</version>
+      <groupId>com.comphenix.protocol</groupId>
+      <artifactId>ProtocolLib</artifactId>
+      <version>4.7.0</version>
       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>co.aikar</groupId>
+      <artifactId>acf-paper</artifactId>
+      <version>0.5.0-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>io.papermc.paper</groupId>
+      <artifactId>paper</artifactId>
+      <version>1.17.1-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!--
+    <dependency>
+      <groupId>com.sk89q.worldguard</groupId>
+      <artifactId>worldguard-bukkit</artifactId>
+      <version>7.0.3</version>
+      <scope>provided</scope>
+    </dependency>
+        -->
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.20</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!--
+    <dependency>
+      <groupId>dev.morphia.morphia</groupId>
+      <artifactId>morphia-core</artifactId>
+      <version>2.1.4</version>
+    </dependency>
+    -->
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+      <version>19.0.0</version>
+      <scope>compile</scope>
     </dependency>
 
   </dependencies>
