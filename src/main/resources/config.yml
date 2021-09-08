@@ -1,0 +1,20 @@
+WorldName: "world"
+Middle:
+  use-spawn-as-middle: true
+  # Those numbers are used if 'use-spawn-as-middle'
+  # is set to false
+  x: 0.0
+  y: 0.0
+  z: 0.0
+Radius: 2000
+Types:
+  - COAL_ORE
+  - IRON_ORE
+  - GOLD_ORE
+  - REDSTONE_ORE
+  - DIAMOND_ORE
+SaveFrequencySeconds: 300
+ConsoleDisplaySeconds: 5
+ConsoleFormat: "§fProgress: §e%percent%% §f[§e%current% / %max%§f] §fChunks/s §e%cps% §fATC §e%atc%"
+NumberOfChunkGenThreads: 16
+NumberOfAnalyzingThreads: 4
