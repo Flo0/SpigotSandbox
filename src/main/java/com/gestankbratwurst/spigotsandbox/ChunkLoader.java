@@ -114,11 +114,13 @@ public class ChunkLoader {
   private void onEnd() {
     this.logProgress();
 
-    this.chunkData.terminate();
-    this.save();
+    CompletableFuture.runAsync(() -> {
+      this.chunkData.terminate();
+      this.save();
+      this.logger.info("§a[Done]");
+    });
 
     this.done = true;
-    this.logger.info("§a[Done]");
   }
 
   private void save() {
