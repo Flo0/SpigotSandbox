@@ -3,6 +3,7 @@ package com.gestankbratwurst.spigotsandbox;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.objects.ObjectBigArrayBigList;
+import it.unimi.dsi.fastutil.objects.ObjectBigList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -21,15 +22,6 @@ import java.util.logging.Logger;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Material;
 
-/*******************************************************
- * Copyright (C) Gestankbratwurst suotokka@gmail.com
- *
- * This file is part of SpigotSandbox and was created at the 30.08.2021
- *
- * SpigotSandbox can not be copied and/or distributed without the express
- * permission of the owner.
- *
- */
 public class ChunkData {
 
   private final Logger logger = OreLocator.getPlugin(OreLocator.class).getLogger();
@@ -37,8 +29,10 @@ public class ChunkData {
   private final ExecutorService executorService;
   private final ConcurrentLinkedDeque<Future<?>> executingFutures = new ConcurrentLinkedDeque<>();
 
-  private final Map<Material, ObjectBigArrayBigList<BlockPosition>> positionMap = Collections.synchronizedMap(
-      new EnumMap<>(Material.class));
+  private final Map<Material, ObjectBigList<BlockPosition>> positionMap = Collections.synchronizedMap(
+      new EnumMap<>(Material.class)
+  );
+
   private final EnumSet<Material> targetMaterials;
   private final Semaphore semaphore;
   private final int threadCount;
@@ -104,7 +98,10 @@ public class ChunkData {
     this.logger.info("§eAwaiting Termination...");
     this.executorService.shutdown();
     try {
-      this.executorService.awaitTermination(5, TimeUnit.MINUTES);
+      if (!this.executorService.awaitTermination(5, TimeUnit.MINUTES)) {
+        this.logger.warning("Termination timed out. Retrying.");
+        this.terminate();
+      }
     } catch (final InterruptedException e) {
       e.printStackTrace();
     }
@@ -116,7 +113,7 @@ public class ChunkData {
     final JsonObject jsonObject = new JsonObject();
     try {
       this.semaphore.acquire(this.threadCount);
-      for (final Entry<Material, ObjectBigArrayBigList<BlockPosition>> entry : this.positionMap.entrySet()) {
+      for (final Entry<Material, ObjectBigList<BlockPosition>> entry : this.positionMap.entrySet()) {
         final String key = entry.getKey().toString();
         final JsonArray array = new JsonArray();
         entry.getValue().stream().filter(Objects::nonNull).sorted().map(BlockPosition::toString).forEach(array::add);

@@ -13,15 +13,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/*******************************************************
- * Copyright (C) Gestankbratwurst suotokka@gmail.com
- *
- * This file is part of SpigotSandbox and was created at the 30.08.2021
- *
- * SpigotSandbox can not be copied and/or distributed without the express
- * permission of the owner.
- *
- */
 public class ChunkLoader {
 
   private final LongArrayFIFOQueue coordinates = new LongArrayFIFOQueue();
@@ -63,7 +54,7 @@ public class ChunkLoader {
 
     for (int x = cMidX - cRad; x <= cMidX + cRad; x++) {
       for (int z = cMidZ - cRad; z <= cMidZ + cRad; z++) {
-        this.coordinates.enqueue(OreLocator.getChunkKey(x, z));
+        this.coordinates.enqueue(ChunkUtils.getChunkKey(x, z));
       }
     }
 
@@ -83,7 +74,7 @@ public class ChunkLoader {
       return;
     }
     final long next = this.coordinates.dequeueLong();
-    final int[] coords = OreLocator.getChunkCoords(next);
+    final int[] coords = ChunkUtils.getChunkCoords(next);
     this.world.getChunkAtAsyncUrgently(coords[0], coords[1]).thenAccept(chunk -> {
       this.chunkData.addSnapshotToAnalyse(chunk.getChunkSnapshot());
       this.startLoaderThread();

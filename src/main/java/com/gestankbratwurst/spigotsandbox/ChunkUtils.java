@@ -1,10 +1,15 @@
-package com.gestankbratwurst.spigotsandbox;/*******************************************************
- * Copyright (C) Gestankbratwurst suotokka@gmail.com
- *
- * This file is part of SpigotSandbox and was created at the 08.09.2021
- *
- * SpigotSandbox can not be copied and/or distributed without the express
- * permission of the owner.
- *
- */public class ChunkUtils {
+package com.gestankbratwurst.spigotsandbox;
+
+public class ChunkUtils {
+
+  public static int[] getChunkCoords(final long chunkKey) {
+    final int x = ((int) chunkKey);
+    final int z = (int) (chunkKey >> 32);
+    return new int[]{x, z};
+  }
+
+  public static long getChunkKey(final int x, final int z) {
+    return (long) x & 0xFFFFFFFFL | ((long) z & 0xFFFFFFFFL) << 32;
+  }
+
 }
